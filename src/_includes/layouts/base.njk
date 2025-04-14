@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }} | El Latin Palace</title>
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  {%  eleventyGoogleFonts 'https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300&display=swap'%}
+  <link rel="stylesheet" href="/css/styles.css">
+
+  <script>
+    document.addEventListener('mousemove', (e) => {
+      const lights = document.querySelectorAll('.party-light');
+      lights.forEach(light => {
+        const speed = light.getAttribute('data-speed') || 5;
+        const x = (window.innerWidth - e.pageX * speed) / 100;
+        const y = (window.innerHeight - e.pageY * speed) / 100;
+        light.style.transform = `translate(${x}px, ${y}px)`;
+      });
+    });
+  </script>
+</head>
+<body>
+  {% include 'layouts/header.njk'%}
+    {% if hero | default(false) %}
+      <section class="hero animate">
+        <div class="container">
+          <div class="hero-content">
+            <h1>Vive la noche <span>latina</span> en Las Palmas</h1>
+            <p>El Latin Palace no es solo una discoteca, es una experiencia caribeña que despierta tus sentidos con ritmo, sabores y energía pura.</p>
+            <div class="btn-group">
+              <a href="/reservas" class="btn btn-primary">Reservar mesa VIP</a>
+              <a href="/eventos" class="btn btn-outline">Ver eventos</a>
+            </div>
+          </div>
+        </div>
+        <div class="btn-group">
+        <div class="party-light" style="top:20%;left:10%;"></div>
+        <div class="party-light" style="top:60%;left:70%;animation-delay:2s;"></div>
+        </div>
+      </section>
+    {% endif %}
+
+
+  <main class="container markdown-content p-5 animate-fade">
+    {{ content | safe }}
+  </main>
+
+    {% include 'layouts/footer.njk'%}
+  <script   src="/js/bootstrap.js"></script>
+</body>
+</html>
